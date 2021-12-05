@@ -1,0 +1,67 @@
+### JSON (RESTAPI?) Style
+POST https://pyconn-graphql.azurewebsites.net/api/SampleGraphQL?code=N4gDSYqmm0qMVAeelWaAY51tJAbTXo/BJH5ABnwf6fRmE5xWZXZzZw==
+Content-Type: application/json
+
+{
+    "query": "query list { memos { id topic message tags datetime } }"
+}
+
+### GraphQL style
+POST https://pyconn-graphql.azurewebsites.net/api/SampleGraphQL?code=N4gDSYqmm0qMVAeelWaAY51tJAbTXo/BJH5ABnwf6fRmE5xWZXZzZw==
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query list { 
+    memos { 
+        id
+        topic
+        message
+        tags
+        datetime
+    }
+}
+
+### GraphQL style
+POST https://pyconn-graphql.azurewebsites.net/api/SampleGraphQL?code=N4gDSYqmm0qMVAeelWaAY51tJAbTXo/BJH5ABnwf6fRmE5xWZXZzZw==
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query list { 
+    memo(id: "memotest123") { 
+        id
+        topic
+        message
+        tags
+        datetime
+    }
+}
+
+### Mutation upsert
+POST https://pyconn-graphql.azurewebsites.net/api/SampleGraphQL?code=N4gDSYqmm0qMVAeelWaAY51tJAbTXo/BJH5ABnwf6fRmE5xWZXZzZw==
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation mutate_memo {
+    create(item: {id: "memotest123", topic: "Mutation", message: "Insert into document memo", tags: ["manual", "mutation", "test"]}) {
+        id
+        topic
+        message
+        tags
+        datetime
+    }
+}
+
+### Mutation delete
+POST https://pyconn-graphql.azurewebsites.net/api/SampleGraphQL?code=N4gDSYqmm0qMVAeelWaAY51tJAbTXo/BJH5ABnwf6fRmE5xWZXZzZw==
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation delete_memo {
+    delete(item: {id: "memotest123"}) {
+        id
+        topic
+        message
+        tags
+        datetime
+    }
+}
